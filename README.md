@@ -84,3 +84,33 @@ void builderDefaultTest() {
 }
 ```
 
+## @SuperBuilder
+
+@Builder는 부모클래스의 필드에 적용되지 않는다. 이러한 문제를 해결하기 위해 1.18 버전부터 @SuperBuilder 애노테이션이 등장했다. 부모클래스와 자식클래스 모두 @SuperBuilder를 붙이면 된다.
+
+```java
+@Getter
+@SuperBuilder
+public class Parent {
+    private final String parentName;
+    private final int parentAge;
+}
+
+@Getter
+@SuperBuilder
+public class Child extends Parent {
+    private final String childName;
+    private final int childAge;
+}
+
+@Test
+void test() {
+    var student = Student.builder()
+            .schoolName("학교이름")
+            .childAge(13)
+            .childName("aki")
+            .build();
+}
+```
+
+주의할 점은 @SuperBuilder는 같은 상속관계에 있는 클래스 내에서 @Builder와 함께 쓸 수 없다는 것이다. 만약 이 둘을 혼용해서 쓴다면 컴파일 에러를 마주하게 된다.
