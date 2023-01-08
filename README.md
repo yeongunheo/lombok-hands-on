@@ -114,3 +114,28 @@ void test() {
 ```
 
 주의할 점은 @SuperBuilder는 같은 상속관계에 있는 클래스 내에서 @Builder와 함께 쓸 수 없다는 것이다. 만약 이 둘을 혼용해서 쓴다면 컴파일 에러를 마주하게 된다.
+
+## @Jacksonized
+
+> The @Jacksonized annotation is an add-on annotation for @Builder and @SuperBuilder . It automatically configures the generated builder class to 
+> be used by Jackson's deserialization. It only has an effect if present at a context where there is also a @Builder or a @SuperBuilder; a warning 
+> is emitted otherwise.
+
+@Jacksonized 역직렬화를 위한 애노테이션이다. @Builder, @SuperBuilder와 함께 쓰인다.
+
+클래스에 기본생성자를 만들면 역직렬화가 가능한데 굳이 @Jacksonized를 사용하는 이유는 무엇일까? 바로 불변을 보장하면서 역직렬화를 가능하게 하기 위해서이다. 아래와 같이 DTO를 불변클래스로 만들고 싶을 때 유용하게 쓸 수 있다.
+
+```java
+@Getter
+public class PersonDto {
+    private final String name;
+    private final int age;
+
+    @Jacksonized
+    @Builder
+    private PersonDto(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+```
