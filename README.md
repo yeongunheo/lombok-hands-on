@@ -139,3 +139,24 @@ public class PersonDto {
     }
 }
 ```
+
+## @UtilityClass
+
+> An annotation to create utility classes. If a class is annotated with @UtilityClass, the following things happen to it:  
+> - It is marked final.  
+> - If any constructors are declared in it, an error is generated. Otherwise, a private no-args constructor is generated; it throws a 
+  UnsupportedOperationException.  
+> - All methods, inner classes, and fields in the class are marked static.  
+> - WARNING: Do not use non-star static imports to import these members; javac won't be able to figure it out. Use either: import static ThisType.*; 
+  or don't static-import.  
+
+애플리케이션 전역에서 사용하는 공통 기능들은 보통 static 멤버로만 이루어진 Utility 클래스로 만들어 사용하곤 한다. 예를 들어 **StringUtils**나 **DateUtils**이 있다. 이 때 사용할 수 있는 것이 
+@UtilityClass이다.
+
+@UtilityClass는 다음과 같은 특징을 지닌다.
+
+- 기본생성자가 private으로 생성된다.
+- 인스턴스를 생성할 수 없다. 만약 인스턴스를 만들게 되면 에러가 발생한다.
+- 모든 필드와 메서드에 static이 적용된다.
+- final 클래스로 생성되어 상속이 불가능해진다.
+
