@@ -1,4 +1,4 @@
-package com.example.lombok.domain;
+package com.example.lombok.builder;
 
 import lombok.AccessLevel;
 import lombok.Builder;

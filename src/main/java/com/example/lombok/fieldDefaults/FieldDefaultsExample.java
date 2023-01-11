@@ -1,4 +1,4 @@
-package com.example.lombok.domain;
+package com.example.lombok.fieldDefaults;
 
 import lombok.AccessLevel;
 import lombok.Getter;
